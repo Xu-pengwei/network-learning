@@ -15,7 +15,7 @@
 ## 二、项目结构
 
 ```
-默认项目/
+Python网络工具/
 ├── main.py                  # 程序入口：欢迎界面 + 主菜单
 ├── README.md                # 本文件
 ├── requirements.txt         # 说明仅使用标准库
@@ -50,36 +50,29 @@ python main.py
 ```powershell
 py main.py
 ```
+### 方式 2：在 Windows 文件资源管理器中运行
 
-### 方式 2：Windows 图形界面操作
-
-**打开项目文件夹：**
-
-1. 按 `Win + E` 打开"文件资源管理器"；
-2. 在顶部的地址栏中粘贴下面的路径，然后按回车：
-   **打开项目文件夹：**
-
-1. 打开文件资源管理器。
-2. 找到你下载或克隆的 `Python网络工具` 文件夹。
-3. 在文件夹地址栏输入 `powershell` 并回车，即可在该目录打开终端。
-4. 执行以下命令启动程序：
+1. 打开文件资源管理器；
+2. 找到下载或克隆的 `network-learning` 文件夹；
+3. 进入其中的 `Python网络工具` 文件夹；
+4. 点击文件资源管理器顶部的地址栏，输入 `powershell`，然后按回车；
+5. 在打开的 PowerShell 窗口中执行：
 
 ```powershell
 python main.py
-3. 即可看到 `main.py`、`nettool`、`tests` 等文件。
-
-> 小技巧：也可以按 `Win + R`，输入上面的路径后回车，同样能直接打开该文件夹。
-
-**在图形界面里运行：**
-
-- 直接**双击 `main.py`**：如果 `.py` 文件已关联到 Python，会弹出一个黑色控制台窗口并启动程序；
-- 或者：在文件夹空白处**按住 Shift + 鼠标右键** → 选择"在此处打开 PowerShell 窗口" → 输入 `python main.py` 回车。
-
 ### 方式 3：在 VS Code 中运行
 
 1. 打开 VS Code；
 2. 菜单 `文件` → `打开文件夹...`，选择
-   `C:\Users\Xupengwei--1014\Documents\默认项目`；
+   2. 菜单选择 `文件` → `打开文件夹...`；
+3. 找到下载或克隆的 `network-learning` 仓库；
+4. 选择其中的 `Python网络工具` 文件夹；
+5. 若首次使用 Python，请在扩展面板中安装 Microsoft 发布的 Python 扩展；
+6. 按 `Ctrl + Shift + P`，执行 `Python: Select Interpreter`，选择 Python 3.8 或更高版本；
+7. 打开 `main.py`，点击右上角的运行按钮，或在终端执行：
+
+```powershell
+python main.py；
 3. 若首次使用 Python，请在左侧扩展面板（`Ctrl + Shift + X`）中安装 **Python** 扩展（Microsoft 官方）；
 4. 按 `Ctrl + Shift + P`，输入 `Python: Select Interpreter`，选择本机的 `Python 3.14.7`；
 5. 打开 `main.py`，然后任选一种方式运行：
@@ -172,7 +165,14 @@ python -m unittest discover -s tests -v
 **5. 终端里中文显示乱码**
 请使用 Windows Terminal、VS Code 集成终端或 PowerShell，并确认文件以 UTF-8 保存。
 
-## 九、可以继续扩展的练习
+## 九、隐私与使用限制
+
+- IP 归属地来自第三方数据库，只能作为近似参考，不能代表准确的物理位置；
+- 查询公网 IP 或指定地址时，查询内容会发送给外部接口；
+- 当前部分免费接口使用 HTTP，不适合查询敏感或内部业务地址；
+- Ping 不通不一定表示网站无法访问，因为目标服务器或防火墙可能禁止 ICMP；
+- DNS 查询的实际等待时间可能受操作系统和本机网络配置影响。
+- ## 十、可以继续扩展的练习
 
 1. 把 Ping 的探测次数改成用户可输入（`ping_host()` 已支持 `count` 参数）；
 2. 增加"批量 Ping"功能：从文本文件读取多个地址，逐个检测；
@@ -180,6 +180,6 @@ python -m unittest discover -s tests -v
 4. 把结果保存成 CSV 或日志文件，方便写实验报告；
 5. 用 `tkinter`（标准库自带）做一个图形界面版本。
 
-## 十、许可
+## 十一、许可
 
 本项目为教学示例，可自由用于课堂练习与二次修改。
