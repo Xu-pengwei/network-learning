@@ -25,6 +25,7 @@ import urllib.request
 
 from . import utils
 
+
 # ---------------------------------------------------------------- 接口配置
 # {query} 会被替换成要查询的 IP 或域名，留空表示"查询本机公网 IP"
 IP_API_URL = (
@@ -54,6 +55,7 @@ PROBE_TARGET = ("8.8.8.8", 80)
 def get_primary_local_ip() -> str | None:
     """获取本机用于访问外网的那块网卡的 IPv4 地址，失败时返回 None。"""
     probe = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
     try:
         probe.connect(PROBE_TARGET)
         return probe.getsockname()[0]
@@ -70,11 +72,20 @@ def collect_addresses(host: str) -> tuple[list[str], list[str]]:
     ipv4: list[str] = []
     ipv6: list[str] = []
 
-    for family, bucket in ((socket.AF_INET, ipv4), (socket.AF_INET6, ipv6)):
+    for family, bucket in (
+        (socket.AF_INET, ipv4),
+        (socket.AF_INET6, ipv6),
+    ):
         try:
-            infos = socket.getaddrinfo(host, None, family, socket.SOCK_STREAM)
+            infos = socket.getaddrinfo(
+                host,
+                None,
+                family,
+                socket.SOCK_STREAM,
+            )
         except socket.gaierror:
             continue
+
         for info in infos:
             address = info[4][0].split("%")[0]
             if address not in bucket:
@@ -86,22 +97,32 @@ def collect_addresses(host: str) -> tuple[list[str], list[str]]:
 def get_local_info() -> dict:
     """
     汇总本机网络信息，返回字典：
-        hostname —— 计算机名
-        primary  —— 主要网卡 IPv4 地址
+        hostname  —— 计算机名
+        primary   —— 主要网卡 IPv4 地址
         ipv4/ipv6 —— 本机全部地址
-        error    —— 出错说明，正常时为 None
+        error     —— 出错说明，正常时为 None
     """
     try:
         hostname = socket.gethostname()
     except OSError as exc:
-        return {"hostname": "", "primary": None, "ipv4": [], "ipv6": [],
-                "error": f"获取计算机名失败：{exc}"}
+        return {
+            "hostname": "",
+            "primary": None,
+            "ipv4": [],
+            "ipv6": [],
+            "error": f"获取计算机名失败：{exc}",
+        }
 
     try:
         ipv4, ipv6 = collect_addresses(hostname)
-    except OSError as exc:  # 理论上 collect_addresses 已忽略解析错误，这里做兜底
-        return {"hostname": hostname, "primary": None, "ipv4": [], "ipv6": [],
-                "error": f"查询本机地址失败：{exc}"}
+    except OSError as exc:
+        return {
+            "hostname": hostname,
+            "primary": None,
+            "ipv4": [],
+            "ipv6": [],
+            "error": f"查询本机地址失败：{exc}",
+        }
 
     return {
         "hostname": hostname,
@@ -126,16 +147,21 @@ def query_ip_info(query: str | None = None) -> dict:
     url = IP_API_URL.format(query=query or "")
     request = urllib.request.Request(
         url,
-        headers={"User-Agent": "PythonNetworkToolbox/1.0"},  # 有些接口要求带 UA
+        headers={"User-Agent": "PythonNetworkToolbox/1.0"},
     )
 
-    # urlopen 支持 with 语法，退出时会自动关闭连接
-    with urllib.request.urlopen(request, timeout=HTTP_TIMEOUT) as response:
+    with urllib.request.urlopen(
+        request,
+        timeout=HTTP_TIMEOUT,
+    ) as response:
         raw = response.read()
 
     data = json.loads(raw.decode("utf-8"))
+
     if data.get("status") != "success":
-        raise RuntimeError(data.get("message") or "接口返回了失败状态")
+        raise RuntimeError(
+            data.get("message") or "接口返回了失败状态"
+        )
 
     return data
 
@@ -145,7 +171,8 @@ def query_public_ip_simple() -> str:
     备用方案：只获取公网 IP 地址，不查询归属地。
 
     依次尝试 FALLBACK_URLS 中的接口，任何一个成功就立即返回。
-    全部失败时抛出 RuntimeError，并把每个接口的失败原因写进提示里。
+    返回内容必须是合法的 IPv4 或 IPv6 地址。
+    全部失败时抛出 RuntimeError，并汇总各接口的失败原因。
     """
     errors: list[str] = []
 
@@ -154,34 +181,49 @@ def query_public_ip_simple() -> str:
             url,
             headers={"User-Agent": "PythonNetworkToolbox/1.0"},
         )
+
         try:
-            with urllib.request.urlopen(request, timeout=HTTP_TIMEOUT) as response:
-                body = response.read().decode("utf-8", errors="replace").strip()
+            with urllib.request.urlopen(
+                request,
+                timeout=HTTP_TIMEOUT,
+            ) as response:
+                body = response.read().decode(
+                    "utf-8",
+                    errors="replace",
+                ).strip()
         except Exception as exc:
             errors.append(f"{name}：{exc}")
             continue
 
-        # 接口可能返回纯文本 IP，也可能返回 JSON，两种都要兼容
+        # 接口可能返回纯文本 IP，也可能返回 JSON。
         if body.startswith("{"):
             try:
-                body = json.loads(body).get("ip", "")
-            except ValueError:
+                data = json.loads(body)
+                body = data.get("ip", "")
+            except (ValueError, AttributeError):
                 body = ""
-                
-if body:
-    try:
-        return str(ipaddress.ip_address(body))
-    except ValueError:
-        errors.append(f"{name}：返回的内容不是合法 IP 地址")
-        continue
 
-errors.append(f"{name}：返回内容为空")        
+        if not body:
+            errors.append(f"{name}：返回内容为空")
+            continue
 
-    raise RuntimeError("；".join(errors) or "所有备用接口均不可用")
+        # 防止把 HTML 错误页或其他文本误认为公网 IP。
+        try:
+            return str(ipaddress.ip_address(body))
+        except ValueError:
+            errors.append(
+                f"{name}：返回的内容不是合法 IP 地址"
+            )
+
+    raise RuntimeError(
+        "；".join(errors) or "所有备用接口均不可用"
+    )
+
 
 def print_ip_info(data: dict) -> None:
     """把归属地查询结果按统一格式输出。"""
     address = data.get("query", "")
+
     utils.print_kv("IP 地址", address or "未知")
     utils.print_kv("地址类型", utils.describe_ip(address))
     utils.print_kv("国家/地区", data.get("country") or "未知")
@@ -200,7 +242,13 @@ def _can_connect_error(exc: BaseException) -> bool:
     """
     return isinstance(
         exc,
-        (urllib.error.URLError, socket.timeout, TimeoutError, ConnectionError, OSError),
+        (
+            urllib.error.URLError,
+            socket.timeout,
+            TimeoutError,
+            ConnectionError,
+            OSError,
+        ),
     )
 
 
@@ -219,28 +267,55 @@ def run_local_info() -> None:
 
     print()
     utils.print_kv("计算机名", info["hostname"])
+
     if info["primary"]:
         utils.print_kv("主要网卡地址", info["primary"])
-        utils.print_kv("地址类型", utils.describe_ip(info["primary"]))
+        utils.print_kv(
+            "地址类型",
+            utils.describe_ip(info["primary"]),
+        )
     else:
-        utils.print_warn("无法探测主要网卡地址，可能是本机没有连接任何网络。")
+        utils.print_warn(
+            "无法探测主要网卡地址，可能是本机没有连接任何网络。"
+        )
 
     if info["ipv4"]:
-        utils.print_info(f"本机 IPv4 地址共 {len(info['ipv4'])} 个：")
-        for index, address in enumerate(info["ipv4"], start=1):
-            print(f"    {index}. {address}  [{utils.describe_ip(address)}]")
+        utils.print_info(
+            f"本机 IPv4 地址共 {len(info['ipv4'])} 个："
+        )
+        for index, address in enumerate(
+            info["ipv4"],
+            start=1,
+        ):
+            print(
+                f"    {index}. {address}  "
+                f"[{utils.describe_ip(address)}]"
+            )
     else:
         utils.print_warn("没有找到本机 IPv4 地址。")
 
     if info["ipv6"]:
-        utils.print_info(f"本机 IPv6 地址共 {len(info['ipv6'])} 个：")
-        for index, address in enumerate(info["ipv6"], start=1):
-            print(f"    {index}. {address}  [{utils.describe_ip(address)}]")
+        utils.print_info(
+            f"本机 IPv6 地址共 {len(info['ipv6'])} 个："
+        )
+        for index, address in enumerate(
+            info["ipv6"],
+            start=1,
+        ):
+            print(
+                f"    {index}. {address}  "
+                f"[{utils.describe_ip(address)}]"
+            )
     else:
-        utils.print_info("本机没有启用 IPv6，或未获取到 IPv6 地址。")
+        utils.print_info(
+            "本机没有启用 IPv6，或未获取到 IPv6 地址。"
+        )
 
     print()
-    utils.print_info("提示：192.168.x.x、10.x.x.x、172.16~31.x.x 都属于内网地址。")
+    utils.print_info(
+        "提示：192.168.x.x、10.x.x.x、"
+        "172.16~31.x.x 都属于内网地址。"
+    )
     utils.pause()
 
 
@@ -251,33 +326,50 @@ def run_public_ip() -> None:
 
     try:
         data = query_ip_info()
-    except Exception as exc:  # 主接口失败时进入备用方案，因此这里需要捕获所有异常
+    except Exception as exc:
+        # 主接口失败时进入备用方案，因此这里捕获所有异常。
         if _can_connect_error(exc):
-            utils.print_fail(f"访问归属地接口失败：网络不可用或请求超时（{exc}）")
+            utils.print_fail(
+                "访问归属地接口失败："
+                f"网络不可用或请求超时（{exc}）"
+            )
         else:
             utils.print_fail(f"归属地查询失败：{exc}")
 
         utils.print_info("正在尝试备用接口...")
+
         try:
             address = query_public_ip_simple()
         except Exception as backup_exc:
-            utils.print_fail(f"备用接口同样失败：{backup_exc}")
-            utils.print_info("请检查本机网络连接后重试。")
+            utils.print_fail(
+                f"备用接口同样失败：{backup_exc}"
+            )
+            utils.print_info(
+                "请检查本机网络连接后重试。"
+            )
             utils.pause()
             return
 
         utils.print_ok("已通过备用接口获取公网 IP")
         print()
         utils.print_kv("公网 IP", address)
-        utils.print_kv("地址类型", utils.describe_ip(address))
-        utils.print_info("备用接口不提供归属地信息。")
+        utils.print_kv(
+            "地址类型",
+            utils.describe_ip(address),
+        )
+        utils.print_info(
+            "备用接口不提供归属地信息。"
+        )
         utils.pause()
         return
 
     print()
     utils.print_ok("查询成功")
     print_ip_info(data)
-    utils.print_info("说明：这里显示的是路由器对外的公网 IP，不是本机网卡的内网地址。")
+    utils.print_info(
+        "说明：这里显示的是路由器对外的公网 IP，"
+        "不是本机网卡的内网地址。"
+    )
     utils.pause()
 
 
@@ -287,27 +379,44 @@ def run_query_target() -> None:
     print("示例：8.8.8.8、114.114.114.114、www.qq.com")
     print()
 
-    target = utils.ask("请输入 IP 或域名（直接回车返回）：")
+    target = utils.ask(
+        "请输入 IP 或域名（直接回车返回）："
+    )
+
     if not target:
-        utils.print_warn("没有输入内容，已返回上一级菜单。")
+        utils.print_warn(
+            "没有输入内容，已返回上一级菜单。"
+        )
         return
 
     query = utils.normalize_target(target)
+
     if not utils.is_valid_target(query):
-        utils.print_fail(f"“{query}”不是合法的 IP 或域名，请重新输入。")
+        utils.print_fail(
+            f"“{query}”不是合法的 IP 或域名，请重新输入。"
+        )
         utils.pause()
         return
 
-    utils.print_info(f"正在查询 {query}，请稍候...")
+    utils.print_info(
+        f"正在查询 {query}，请稍候..."
+    )
 
     try:
         data = query_ip_info(query)
     except Exception as exc:
         if _can_connect_error(exc):
-            utils.print_fail(f"查询失败：网络不可用或请求超时（{exc}）")
+            utils.print_fail(
+                "查询失败："
+                f"网络不可用或请求超时（{exc}）"
+            )
         else:
             utils.print_fail(f"查询失败：{exc}")
-        utils.print_info("如果输入的是内网地址，公共接口无法查询归属地，这是正常现象。")
+
+        utils.print_info(
+            "如果输入的是内网地址，公共接口无法查询归属地，"
+            "这是正常现象。"
+        )
         utils.pause()
         return
 
@@ -338,4 +447,6 @@ def run() -> None:
         elif choice == "0" or choice == "":
             return
         else:
-            utils.print_warn("输入无效，请输入 0、1、2 或 3。")
+            utils.print_warn(
+                "输入无效，请输入 0、1、2 或 3。"
+            )
