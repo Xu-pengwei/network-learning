@@ -18,7 +18,7 @@
 | 序号 | 实验内容 | 状态 |
 |---|---|---|
 | 01 | [Windows Server 2022 DNS 实验](notes/windows-server-dns.md) | 已完成 |
-| 02 | Windows 10 加入域与域账户登录 | 待整理 |
+| 02 | [Windows 10 加入域与域账户登录](notes/windows10-domain-login.md) | 已完成 |
 | 03 | DHCP 服务器配置与验证 | 待学习 |
 | 04 | Ubuntu 网络基础配置 | 待学习 |
 
