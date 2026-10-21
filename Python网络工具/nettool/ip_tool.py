@@ -167,14 +167,17 @@ def query_public_ip_simple() -> str:
                 body = json.loads(body).get("ip", "")
             except ValueError:
                 body = ""
+                
+if body:
+    try:
+        return str(ipaddress.ip_address(body))
+    except ValueError:
+        errors.append(f"{name}：返回的内容不是合法 IP 地址")
+        continue
 
-        if body:
-            return body
-
-        errors.append(f"{name}：返回内容为空")
+errors.append(f"{name}：返回内容为空")        
 
     raise RuntimeError("；".join(errors) or "所有备用接口均不可用")
-
 
 def print_ip_info(data: dict) -> None:
     """把归属地查询结果按统一格式输出。"""
