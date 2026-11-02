@@ -22,6 +22,7 @@
 | 03 | [Python 网络工具箱](Python网络工具/README.md) | 已完成，持续完善 |
 | 04 | [DHCP 服务器配置与验证](notes/windows-server-dhcp.md) | 已完成 |
 | 05 | [Ubuntu 网络基础配置](notes/ubuntu-network-basics.md) | 已完成 |
+| 06 | [Wireshark ICMP 抓包实验](notes/wireshark-icmp.md) | 已完成 |
 
 ## 实验环境
 
@@ -36,7 +37,7 @@
 
 | 阶段 | 计划内容 | 预期成果 | 状态 |
 |---|---|---|---|
-| 第一阶段 | Wireshark 基础与 ICMP 抓包 | 识别 Ping 请求和响应，查看源 IP、目标 IP 与 ICMP 类型 | 下一步 |
+| 第一阶段 | Wireshark 基础与 ICMP 抓包 | 识别 Ping 请求和响应，查看源 IP、目标 IP 与 ICMP 类型 | 已完成 |
 | 第二阶段 | DNS 抓包分析 | 观察 DNS 查询、响应、记录类型和解析结果 | 待开始 |
 | 第三阶段 | DHCP 抓包分析 | 理解 Discover、Offer、Request、ACK 四个阶段 | 待开始 |
 | 第四阶段 | TCP 三次握手与四次挥手 | 识别 SYN、ACK、FIN 和常见 TCP 标志位 | 待开始 |
@@ -49,20 +50,7 @@
 
 ## 近期实验安排
 
-下一篇计划完成：
-
-```text
-06 - Wireshark ICMP 抓包实验
-```
-
-主要任务：
-
-1. 在 Ubuntu 中安装并配置 Wireshark。
-2. 使用 `ens33` 网卡捕获数据包。
-3. 对 `192.168.168.10` 执行 Ping 测试。
-4. 使用 `icmp` 显示过滤器筛选数据包。
-5. 分析 Echo Request 和 Echo Reply。
-6. 将实际操作、验证结果和排错过程整理为实验报告。
+已完成 [06 - Wireshark ICMP 抓包实验](notes/wireshark-icmp.md)。下一步计划学习 DNS 抓包分析，观察 DNS 查询和响应。
 
 ## 学习节奏
 
