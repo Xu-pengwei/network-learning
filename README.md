@@ -21,7 +21,7 @@
 | 02 | [Windows 10 加入域与域账户登录](notes/windows10-domain-login.md) | 已完成 |
 | 03 | [Python 网络工具箱](Python网络工具/README.md) | 已完成，持续完善 |
 | 04 | [DHCP 服务器配置与验证](notes/windows-server-dhcp.md) | 已完成 |
-| 05 | [Ubuntu 网络基础配置](notes/ubuntu-network-basics.md) | 进行中 |
+| 05 | [Ubuntu 网络基础配置](notes/ubuntu-network-basics.md) | 已完成 |
 
 ## 实验环境
 
