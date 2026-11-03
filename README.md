@@ -23,6 +23,7 @@
 | 04 | [DHCP 服务器配置与验证](notes/windows-server-dhcp.md) | 已完成 |
 | 05 | [Ubuntu 网络基础配置](notes/ubuntu-network-basics.md) | 已完成 |
 | 06 | [Wireshark ICMP 抓包实验](notes/wireshark-icmp.md) | 已完成 |
+| 07 | [Wireshark DNS 抓包分析](notes/wireshark-dns.md) | 已完成 |
 
 ## 实验环境
 
@@ -38,7 +39,7 @@
 | 阶段 | 计划内容 | 预期成果 | 状态 |
 |---|---|---|---|
 | 第一阶段 | Wireshark 基础与 ICMP 抓包 | 识别 Ping 请求和响应，查看源 IP、目标 IP 与 ICMP 类型 | 已完成 |
-| 第二阶段 | DNS 抓包分析 | 观察 DNS 查询、响应、记录类型和解析结果 | 待开始 |
+| 第二阶段 | DNS 抓包分析 | 观察 DNS 查询、响应、记录类型和解析结果 | 已完成 |
 | 第三阶段 | DHCP 抓包分析 | 理解 Discover、Offer、Request、ACK 四个阶段 | 待开始 |
 | 第四阶段 | TCP 三次握手与四次挥手 | 识别 SYN、ACK、FIN 和常见 TCP 标志位 | 待开始 |
 | 第五阶段 | HTTP 与 HTTPS 基础分析 | 区分明文请求与 TLS 加密流量，理解常见端口 | 待开始 |
@@ -50,7 +51,7 @@
 
 ## 近期实验安排
 
-已完成 [06 - Wireshark ICMP 抓包实验](notes/wireshark-icmp.md)。下一步计划学习 DNS 抓包分析，观察 DNS 查询和响应。
+已完成 [07 - Wireshark DNS 抓包分析](notes/wireshark-dns.md)。下一步计划学习 DHCP 抓包分析，观察地址分配过程。
 
 ## 学习节奏
 
