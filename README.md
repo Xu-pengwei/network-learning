@@ -24,7 +24,7 @@
 | 05 | [Ubuntu 网络基础配置](notes/ubuntu-network-basics.md) | 已完成 |
 | 06 | [Wireshark ICMP 抓包实验](notes/wireshark-icmp.md) | 已完成 |
 | 07 | [Wireshark DNS 抓包分析](notes/wireshark-dns.md) | 已完成 |
-| 08 | [Wireshark DHCP 抓包分析](notes/wireshark-dhcp.md) | 进行中：Request/ACK 与配置、DNS 验证完成；Discover/Offer 待补 |
+| 08 | [Wireshark DHCP 抓包分析](notes/wireshark-dhcp.md) | 已完成：完整 DORA 抓包与网络验收通过 |
 
 ## 实验环境
 
@@ -41,7 +41,7 @@
 |---|---|---|---|
 | 第一阶段 | Wireshark 基础与 ICMP 抓包 | 识别 Ping 请求和响应，查看源 IP、目标 IP 与 ICMP 类型 | 已完成 |
 | 第二阶段 | DNS 抓包分析 | 观察 DNS 查询、响应、记录类型和解析结果 | 已完成 |
-| 第三阶段 | DHCP 抓包分析 | 理解 Discover、Offer、Request、ACK 四个阶段 | 进行中：已捕获 Request/ACK，完整 DORA 待完成 |
+| 第三阶段 | DHCP 抓包分析 | 理解 Discover、Offer、Request、ACK 四个阶段 | 已完成 |
 | 第四阶段 | TCP 三次握手与四次挥手 | 识别 SYN、ACK、FIN 和常见 TCP 标志位 | 待开始 |
 | 第五阶段 | HTTP 与 HTTPS 基础分析 | 区分明文请求与 TLS 加密流量，理解常见端口 | 待开始 |
 | 第六阶段 | IP 地址与子网划分练习 | 能够计算网络地址、广播地址和可用主机范围 | 待开始 |
@@ -52,7 +52,7 @@
 
 ## 近期实验安排
 
-2026-11-04 已完成 [08 - Wireshark DHCP 抓包分析](notes/wireshark-dhcp.md) 中的 Request/ACK 观察、客户端配置核对与 DNS 解析验证。未捕获 Discover 和 Offer，下一步补齐完整 DORA 四步抓包。
+2026-11-05 已完成 [08 - Wireshark DHCP 抓包分析](notes/wireshark-dhcp.md)：在 Wireshark 中捕获同一次事务的 Discover、Offer、Request、ACK，核对地址、网关、DNS 与租约参数，并完成连通性和 DNS 解析验收。下一步进入 TCP 三次握手与四次挥手实验。
 
 ## 学习节奏
 
