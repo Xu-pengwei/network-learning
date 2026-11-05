@@ -15,17 +15,16 @@
 
 ## 实验笔记
 
-| 序号 | 实验内容 | 状态 |
-|---|---|---|
-| 01 | [Windows Server 2022 DNS 实验](notes/windows-server-dns.md) | 已完成 |
-| 02 | [Windows 10 加入域与域账户登录](notes/windows10-domain-login.md) | 已完成 |
-| 03 | [Python 网络工具箱](Python网络工具/README.md) | 已完成，持续完善 |
-| 04 | [DHCP 服务器配置与验证](notes/windows-server-dhcp.md) | 已完成 |
-| 05 | [Ubuntu 网络基础配置](notes/ubuntu-network-basics.md) | 已完成 |
-| 06 | [Wireshark ICMP 抓包实验](notes/wireshark-icmp.md) | 已完成 |
-| 07 | [Wireshark DNS 抓包分析](notes/wireshark-dns.md) | 已完成 |
-| 08 | [Wireshark DHCP 抓包分析](notes/wireshark-dhcp.md) | 已完成：完整 DORA 抓包与网络验收通过 |
-
+| 序号 | 实验内容 | 学习进度 | 实验验证 | 知识掌握 |
+|---|---|---|---|---|
+| 01 | [Windows Server 2022 DNS 实验](notes/windows-server-dns.md) | 已完成且已验证 | 已验证 | 初步理解 |
+| 02 | [Windows 10 加入域与域账户登录](notes/windows10-domain-login.md) | 已完成且已验证 | 已验证 | 初步理解 |
+| 03 | [Python 网络工具箱](Python网络工具/README.md) | 进行中 | 不适用 | 未评估 |
+| 04 | [DHCP 服务器配置与验证](notes/windows-server-dhcp.md) | 已完成且已验证 | 已验证 | 初步理解 |
+| 05 | [Ubuntu 网络基础配置](notes/ubuntu-network-basics.md) | 已完成且已验证 | 已验证 | 初步理解 |
+| 06 | [Wireshark ICMP 抓包实验](notes/wireshark-icmp.md) | 已完成且已验证 | 已验证 | 初步理解 |
+| 07 | [Wireshark DNS 抓包分析](notes/wireshark-dns.md) | 已完成且已验证 | 已验证 | 初步理解 |
+| 08 | [Wireshark DHCP 抓包分析](notes/wireshark-dhcp.md) | 已完成且已验证 | 已验证 | 初步理解 |
 ## 实验环境
 
 - VMware 虚拟机
