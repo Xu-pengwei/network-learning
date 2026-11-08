@@ -259,6 +259,8 @@ def print_report(result: dict, host: str, count: int) -> None:
     if received == 0:
         utils.print_fail("检测失败：目标主机没有任何回应。")
         utils.print_info("可能原因：对方关机、网络断开，或防火墙拦截了 ICMP 请求。")
+    elif loss is None:
+        utils.print_info("收到目标主机回应，但无法确定丢包率。")
     elif loss == 0:
         utils.print_ok("网络连通正常，所有探测包都收到了回应。")
     else:

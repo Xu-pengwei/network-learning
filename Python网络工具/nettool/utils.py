@@ -196,10 +196,12 @@ def describe_ip(text: str) -> str:
         return "回环地址（指向本机）"
     if ip.is_link_local:
         return "链路本地地址（局域网内部自动配置）"
-    if ip.is_private:
-        return "内网（私有）地址"
-    if ip.is_multicast:
-        return "组播地址"
     if ip.is_unspecified:
         return "未指定地址"
+    if ip.is_multicast:
+        return "组播地址"
+    if isinstance(ip, ipaddress.IPv4Address) and ip == ipaddress.IPv4Address("255.255.255.255"):
+        return "受限广播地址"
+    if ip.is_private:
+        return "内网（私有）地址"
     return "公网地址"
