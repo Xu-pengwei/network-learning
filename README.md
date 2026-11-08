@@ -25,6 +25,7 @@
 | 06 | [Wireshark ICMP 抓包实验](notes/wireshark-icmp.md) | 已完成且已验证 | 已验证 | 初步理解 |
 | 07 | [Wireshark DNS 抓包分析](notes/wireshark-dns.md) | 已完成且已验证 | 已验证 | 初步理解 |
 | 08 | [Wireshark DHCP 抓包分析](notes/wireshark-dhcp.md) | 已完成且已验证 | 已验证 | 初步理解 |
+| 09 | [Wireshark TCP 握手与挥手分析](notes/wireshark-tcp.md) | 已完成 | 已验证 | 序列号规则待巩固 |
 ## 实验环境
 
 - VMware 虚拟机
@@ -41,7 +42,7 @@
 | 第一阶段 | Wireshark 基础与 ICMP 抓包 | 识别 Ping 请求和响应，查看源 IP、目标 IP 与 ICMP 类型 | 已完成 |
 | 第二阶段 | DNS 抓包分析 | 观察 DNS 查询、响应、记录类型和解析结果 | 已完成 |
 | 第三阶段 | DHCP 抓包分析 | 理解 Discover、Offer、Request、ACK 四个阶段 | 已完成 |
-| 第四阶段 | TCP 三次握手与四次挥手 | 识别 SYN、ACK、FIN 和常见 TCP 标志位 | 待开始 |
+| 第四阶段 | TCP 三次握手与四次挥手 | 识别 SYN、ACK、FIN 和常见 TCP 标志位 | 实验已完成，知识待巩固 |
 | 第五阶段 | HTTP 与 HTTPS 基础分析 | 区分明文请求与 TLS 加密流量，理解常见端口 | 待开始 |
 | 第六阶段 | IP 地址与子网划分练习 | 能够计算网络地址、广播地址和可用主机范围 | 待开始 |
 | 第七阶段 | 交换与路由基础实验 | 理解 ARP、MAC 地址、网关和跨网段通信 | 待开始 |
@@ -51,7 +52,7 @@
 
 ## 近期实验安排
 
-2026-11-05 已完成 [08 - Wireshark DHCP 抓包分析](notes/wireshark-dhcp.md)：在 Wireshark 中捕获同一次事务的 Discover、Offer、Request、ACK，核对地址、网关、DNS 与租约参数，并完成连通性和 DNS 解析验收。下一步进入 TCP 三次握手与四次挥手实验。
+2026-11-08 已完成 [09 - Wireshark TCP 握手与挥手分析](notes/wireshark-tcp.md)：通过连接 Windows Server 2022 的 TCP 53 端口，在同一个 TCP Stream 中捕获完整三次握手与四次挥手，并核对 SYN、ACK、FIN、端口及相对序列号。下一步先复习 SYN/FIN 占用序列号的规则，再进入 HTTP 与 HTTPS 基础分析。
 
 ## 学习节奏
 
