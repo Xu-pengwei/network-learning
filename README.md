@@ -26,6 +26,8 @@
 | 07 | [Wireshark DNS 抓包分析](notes/wireshark-dns.md) | 已完成且已验证 | 已验证 | 初步理解 |
 | 08 | [Wireshark DHCP 抓包分析](notes/wireshark-dhcp.md) | 已完成且已验证 | 已验证 | 初步理解 |
 | 09 | [Wireshark TCP 握手与挥手分析](notes/wireshark-tcp.md) | 已完成 | 已验证 | 序列号规则待巩固 |
+| 10 | [Wireshark HTTP 明文与 HTTPS 加密对比](notes/wireshark-http-https.md) | 已完成 | 已验证 | 基本掌握 |
+
 ## 实验环境
 
 - VMware 虚拟机
@@ -43,7 +45,7 @@
 | 第二阶段 | DNS 抓包分析 | 观察 DNS 查询、响应、记录类型和解析结果 | 已完成 |
 | 第三阶段 | DHCP 抓包分析 | 理解 Discover、Offer、Request、ACK 四个阶段 | 已完成 |
 | 第四阶段 | TCP 三次握手与四次挥手 | 识别 SYN、ACK、FIN 和常见 TCP 标志位 | 实验已完成，知识待巩固 |
-| 第五阶段 | HTTP 与 HTTPS 基础分析 | 区分明文请求与 TLS 加密流量，理解常见端口 | 待开始 |
+| 第五阶段 | HTTP 与 HTTPS 基础分析 | 区分明文请求与 TLS 加密流量，理解常见端口 | 已完成 |
 | 第六阶段 | IP 地址与子网划分练习 | 能够计算网络地址、广播地址和可用主机范围 | 待开始 |
 | 第七阶段 | 交换与路由基础实验 | 理解 ARP、MAC 地址、网关和跨网段通信 | 待开始 |
 | 第八阶段 | Linux 网络服务与防火墙 | 学习 SSH、端口监听、服务状态和 UFW 基础配置 | 待开始 |
@@ -52,7 +54,7 @@
 
 ## 近期实验安排
 
-2026-11-08 已完成 [09 - Wireshark TCP 握手与挥手分析](notes/wireshark-tcp.md)：通过连接 Windows Server 2022 的 TCP 53 端口，在同一个 TCP Stream 中捕获完整三次握手与四次挥手，并核对 SYN、ACK、FIN、端口及相对序列号。下一步先复习 SYN/FIN 占用序列号的规则，再进入 HTTP 与 HTTPS 基础分析。
+2026-11-11 已完成 [10 - Wireshark HTTP 明文与 HTTPS 加密对比](notes/wireshark-http-https.md)：使用 neverssl.com 验证 HTTP 明文 GET 与 200 OK，使用 example.com 捕获 TLS 1.3 Client Hello、Server Hello 和加密 Application Data，确认最终协商密码套件为 TLS_AES_256_GCM_SHA384。下一步进入 IP 地址与子网划分练习。
 
 ## 学习节奏
 
