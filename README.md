@@ -27,6 +27,7 @@
 | 08 | [Wireshark DHCP 抓包分析](notes/wireshark-dhcp.md) | 已完成且已验证 | 已验证 | 初步理解 |
 | 09 | [Wireshark TCP 握手与挥手分析](notes/wireshark-tcp.md) | 已完成 | 已验证 | 序列号规则待巩固 |
 | 10 | [Wireshark HTTP 明文与 HTTPS 加密对比](notes/wireshark-http-https.md) | 已完成 | 已验证 | 基本掌握 |
+| 11 | [IPv4 地址与子网划分基础](notes/ip-subnetting-basics.md) | 基础练习已完成 | 已验证 | 基本掌握，区间规则待巩固 |
 
 ## 实验环境
 
@@ -46,7 +47,7 @@
 | 第三阶段 | DHCP 抓包分析 | 理解 Discover、Offer、Request、ACK 四个阶段 | 已完成 |
 | 第四阶段 | TCP 三次握手与四次挥手 | 识别 SYN、ACK、FIN 和常见 TCP 标志位 | 实验已完成，知识待巩固 |
 | 第五阶段 | HTTP 与 HTTPS 基础分析 | 区分明文请求与 TLS 加密流量，理解常见端口 | 已完成 |
-| 第六阶段 | IP 地址与子网划分练习 | 能够计算网络地址、广播地址和可用主机范围 | 待开始 |
+| 第六阶段 | IP 地址与子网划分练习 | 能够计算网络地址、广播地址和可用主机范围 | 进行中：已完成 /24、/26、/27 基础 |
 | 第七阶段 | 交换与路由基础实验 | 理解 ARP、MAC 地址、网关和跨网段通信 | 待开始 |
 | 第八阶段 | Linux 网络服务与防火墙 | 学习 SSH、端口监听、服务状态和 UFW 基础配置 | 待开始 |
 | 第九阶段 | Python 网络工具完善 | 增加异常处理、参数输入、结果保存和自动化测试 | 持续完善 |
@@ -54,7 +55,7 @@
 
 ## 近期实验安排
 
-2026-11-11 已完成 [10 - Wireshark HTTP 明文与 HTTPS 加密对比](notes/wireshark-http-https.md)：使用 neverssl.com 验证 HTTP 明文 GET 与 200 OK，使用 example.com 捕获 TLS 1.3 Client Hello、Server Hello 和加密 Application Data，确认最终协商密码套件为 TLS_AES_256_GCM_SHA384。下一步进入 IP 地址与子网划分练习。
+2026-11-12 已完成 [11 - IPv4 地址与子网划分基础](notes/ip-subnetting-basics.md) 的首轮练习：通过 Ubuntu 验证 192.168.168.128/24、直连网络和广播地址，掌握主机位、块大小、网络地址、广播地址及可用主机数的计算，并完成 /26、/27 区间判断。下一步继续练习 /28 和根据主机数量反推 CIDR 前缀。
 
 ## 学习节奏
 
