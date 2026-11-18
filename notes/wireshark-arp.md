@@ -1,10 +1,10 @@
-# 实验 11：ARP 地址解析协议（Address Resolution Protocol）
+# 实验 14：ARP 地址解析协议（Address Resolution Protocol）
 
 ## 实验基本信息
 
 | 项目 | 内容 |
 |---|---|
-| 实验编号 | 11 |
+| 实验编号 | 14 |
 | 实验日期 | 2026-11-18 |
 | 实验名称 | ARP 地址解析协议 |
 | 实验分类 | 网络协议分析 / 局域网通信 |
@@ -120,7 +120,7 @@ arp
 | Sender MAC address | 46:7b:2b:d9:1f:4a |
 | Sender IP address | 10.15.228.239 |
 | Target MAC address | 00:00:00:00:00:00 |
-| Target IP address | 实际抓包中显示的目标 IPv4 地址 |
+| Target IP address | 10.15.228.159 |
 
 **分析：**
 
