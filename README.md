@@ -31,7 +31,7 @@
 | 12 | [IPv4 子网划分进阶练习：/28 与 CIDR 反推](notes/ipv4-subnetting-practice-02.md) | 今日计算练习已完成 | 不适用（理论练习） | 基本掌握，易错点待巩固 |
 | 13 | [VLSM 可变长子网掩码综合实战](notes/vlsm-practice-2026-11-17.md) | 综合练习已完成 | 不适用（理论练习） | 连续分配基本掌握，总地址数与剩余空间计算待巩固 |
 | 14 | [Wireshark ARP 地址解析协议实验](notes/wireshark-arp.md) | 已完成 | 已验证 | 基本掌握，请求与应答过程待巩固 |
-| 15 | [eNSP 华为交换机 VLAN 划分与跨 VLAN 通信](notes/ensp-vlan-inter-vlan-routing.md) | 已完成 | 核心通信已验证 | 待巩固 |
+| 15 | [eNSP 华为交换机 VLAN 划分与跨 VLAN 通信](notes/ensp-vlan-inter-vlan-routing.md) | 核心配置与通信验证已完成 | 核心通信已验证 | 待巩固 |
 
 ## 实验环境
 
