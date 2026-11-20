@@ -32,6 +32,7 @@
 | 13 | [VLSM 可变长子网掩码综合实战](notes/vlsm-practice-2026-11-17.md) | 综合练习已完成 | 不适用（理论练习） | 连续分配基本掌握，总地址数与剩余空间计算待巩固 |
 | 14 | [Wireshark ARP 地址解析协议实验](notes/wireshark-arp.md) | 已完成 | 已验证 | 基本掌握，请求与应答过程待巩固 |
 | 15 | [eNSP 华为交换机 VLAN 划分与跨 VLAN 通信](notes/ensp-vlan-inter-vlan-routing.md) | 核心配置与通信验证已完成 | 核心通信已验证 | 待巩固 |
+| 16 | [Wireshark 802.1Q VLAN 标签抓包分析](notes/wireshark-vlan-8021q.md) | Trunk 链路抓包成功，VLAN 10/20 标签识别成功 | 抓包验证通过 | 基本掌握，字段细节待巩固 |
 
 ## 实验环境
 
@@ -52,7 +53,7 @@
 | 第四阶段 | TCP 三次握手与四次挥手 | 识别 SYN、ACK、FIN 和常见 TCP 标志位 | 实验已完成，知识待巩固 |
 | 第五阶段 | HTTP 与 HTTPS 基础分析 | 区分明文请求与 TLS 加密流量，理解常见端口 | 已完成 |
 | 第六阶段 | IP 地址与子网划分练习 | 能够计算网络地址、广播地址和可用主机范围，并根据主机数量选择前缀 | 进行中：已完成 /24、/26、/27、/28、CIDR 反推及五部门 VLSM 综合分配；总地址数与剩余空间计算仍需巩固 |
-| 第七阶段 | 交换与路由基础实验 | 理解 ARP、MAC 地址、网关和跨网段通信 | 进行中：已完成 ARP 基础学习与抓包、VLAN 划分及跨 VLAN 通信实验，后续继续学习交换与路由 |
+| 第七阶段 | 交换与路由基础实验 | 理解 ARP、MAC 地址、网关和跨网段通信 | 进行中：已完成 ARP 基础学习与抓包、VLAN 划分及跨 VLAN 通信实验、802.1Q VLAN 标签抓包分析，后续继续学习 MAC 地址表与交换机转发机制 |
 | 第八阶段 | Linux 网络服务与防火墙 | 学习 SSH、端口监听、服务状态和 UFW 基础配置 | 待开始 |
 | 第九阶段 | Python 网络工具完善 | 增加异常处理、参数输入、结果保存和自动化测试 | 持续完善 |
 | 第十阶段 | 综合网络故障排查 | 综合使用 Windows Server、Ubuntu、Wireshark 和 Python 完成排错报告 | 待开始 |
@@ -71,6 +72,8 @@
 2026-11-18 已完成 [Wireshark ARP 地址解析协议实验](notes/wireshark-arp.md)：学习 ARP 的基本作用，理解 IPv4 地址与 MAC 地址之间的映射关系，分析 ARP Request 和 ARP Reply 的报文结构，并通过 Windows `arp -a` 命令查看本机 ARP 缓存表。本次实验完成了 ARP 基础抓包与缓存表查看，初步掌握 ARP 请求与应答过程。后续继续巩固 ARP 报文字段，以及本地通信和跨网段通信时的 MAC 地址解析区别。
 
 2026-11-19 已完成 [eNSP 华为交换机 VLAN 划分与跨 VLAN 通信](notes/ensp-vlan-inter-vlan-routing.md)：使用两台华为 S5700 交换机和四台 PC，完成 VLAN 10、VLAN 20 划分，配置 Access 接口、Trunk 链路及 VLANIF 三层网关。通过五项通信测试，验证了同 VLAN 跨交换机通信和不同 VLAN 之间的通信。本次实验核心配置与通信验证已完成，SW1、SW2 配置均已保存；Wireshark 802.1Q 抓包尚未进行。
+
+2026-11-20 已完成 [Wireshark 802.1Q VLAN 标签抓包分析](notes/wireshark-vlan-8021q.md)：沿用实验十三的 eNSP 拓扑，在 SW1 与 SW2 之间的 Trunk 链路上抓包。通过 PC1 与 PC3、PC2 与 PC4 的通信测试，分别捕获并识别出 VLAN 10 和 VLAN 20 的 802.1Q 标签。Wireshark 中观察到 PRI=0、DEI=0、VID=10/20、Type=IPv4（0x0800）。已理解 Access 与 Trunk 的基本标签处理区别，802.1Q 字段细节仍需巩固。
 
 ## 学习节奏
 
