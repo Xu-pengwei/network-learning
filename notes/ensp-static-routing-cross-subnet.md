@@ -27,6 +27,8 @@
 
 本实验使用两台华为 AR2220 路由器和两台 PC，构建两个不同网段，通过路由器互联实现跨网段通信。
 
+![实验拓扑](../images/ensp-static-routing-topology.png)
+
 ### 1. 设备连接关系
 
 | 设备 | 接口 | 连接设备 | 接口 |
@@ -197,6 +199,8 @@ display ip interface brief
 display ip routing-table
 ```
 
+![R1 路由表验证](../images/ensp-static-routing-r1-table.png)
+
 R1 中成功出现目标网段的静态路由：
 
 ```text
@@ -204,6 +208,8 @@ R1 中成功出现目标网段的静态路由：
 ```
 
 R2 中成功出现返回网段的静态路由：
+
+![R2 路由表验证](../images/ensp-static-routing-r2-table.png)
 
 ```text
 192.168.10.0/24  Static  60  0  RD  10.0.12.1  GigabitEthernet0/0/1
@@ -255,6 +261,8 @@ round-trip min/avg/max = 0/18/32 ms
 - 最大延迟：32 ms
 
 **最终验证：PC1 到 PC2 跨网段通信成功。**
+
+![PC1 到 PC2 跨网段 Ping 测试成功](../images/ensp-static-routing-ping-success.png)
 
 ## 八、实验过程中的问题与排错
 
